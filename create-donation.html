@@ -6,6 +6,12 @@
     <title>Create Donation Post</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dashboard.css">
+    <style>
+        .active1{
+            background-color: rgb(41, 134, 215);
+            color:white;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -29,7 +35,7 @@
             <div class="form-group">
                 <label>Food Type</label>
                 <div class="food-type-toggle">
-                    <button type="button" class="food-type-btn active" id="vegButton" data-type="veg">
+                    <button type="button" class="food-type-btn active1" id="vegButton" data-type="veg">
                         <i class="fas fa-leaf"></i> Veg
                     </button>
                     <button type="button" class="food-type-btn" id="nonVegButton" data-type="nonveg">
@@ -73,6 +79,60 @@
         </form>
     </div>
 
-    <script src="app.js"></script>
+    <script >
+        
+       
+    const form = document.getElementById("donationForm");
+   
+    let foodType = ""; // Use 'let' instead of 'const'
+
+    const vegButton = document.getElementById("vegButton");
+    const nonVegButton = document.getElementById("nonVegButton");
+
+    vegButton.addEventListener("click", (e) => {
+        document.querySelectorAll(".food-type-btn").forEach(btn => btn.classList.remove("active1"));
+        foodType = "veg";  // Now it can be reassigned
+        vegButton.classList.add("active1");
+    });
+
+    nonVegButton.addEventListener("click", (e) => {
+        document.querySelectorAll(".food-type-btn").forEach(btn => btn.classList.remove("active1"));
+        foodType = "nonVeg"; // Now it can be reassigned
+        nonVegButton.classList.add("active1");
+    });
+    
+    form.addEventListener("submit", (event)=> {
+        event.preventDefault();
+        const foodDescription = document.getElementById("foodDescription").value;
+        const foodQuantity = document.getElementById("foodQuantity").value;
+        const expiryTime = document.getElementById("expiryTime").value;
+        const address = document.getElementById("pickupAddress").value;
+        const currentLocation = document.querySelector('#useLocationBtn').value;
+        const obj = {
+            foodDescription,
+            foodQuantity,
+            expiryTime,
+            address,
+            currentLocation,
+            foodType
+        };
+        fetch("https://backend-feeding-friends-3.onrender.com/donorPost",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:
+                JSON.stringify(obj),
+        }
+        .then(response=>response.json())
+        .then(data=>console.log("POST created"))
+        .then(data=>window.location.href = "profile.html")
+        .catch(error => console.error("Error:", error))
+        );
+        form.reset();
+    })
+
+
+    </script>
 </body>
 </html>
