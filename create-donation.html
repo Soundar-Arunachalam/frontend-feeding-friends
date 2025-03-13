@@ -107,13 +107,13 @@
         const foodQuantity = document.getElementById("foodQuantity").value;
         const expiryTime = document.getElementById("expiryTime").value;
         const address = document.getElementById("pickupAddress").value;
-        const currentLocation = document.querySelector('#useLocationBtn').value;
+        //const currentLocation = document.querySelector('#useLocationBtn').value;
         const obj = {
             foodDescription,
             foodQuantity,
             expiryTime,
             address,
-            currentLocation,
+            
             foodType
         };
         fetch("https://backend-feeding-friends-3.onrender.com/donorPost",{
@@ -123,12 +123,12 @@
             },
             body:
                 JSON.stringify(obj),
-        }
+        })
         .then(response=>response.json())
         .then(data=>console.log("POST created"))
         .then(data=>window.location.href = "profile.html")
         .catch(error => console.error("Error:", error))
-        );
+        
         form.reset();
     })
 
