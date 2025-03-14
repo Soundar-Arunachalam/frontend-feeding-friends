@@ -139,6 +139,9 @@
         </nav>
     </div>
 
-    <script src="dashboard.js"></script>
+    <script >
+        const user = localStorage.getItem("user");
+        document.getElementById("status_bar").innerText = `Hi ${user.contactName}`
+    </script>
 </body>
 </html>
