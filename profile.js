@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3>Food title</h3>
                     <div class="food-info">
                         <div class="food-image">
-                            <img src="${currentDonation.image || 'food-placeholder.jpg'}" alt="Food">
+                            <img src="${'img2.jpeg'}" alt="Food">
                         </div>
                         <div class="food-description">
                             <p>${currentDonation.title}</p>
