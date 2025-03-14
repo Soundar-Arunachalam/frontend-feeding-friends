@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p class="estimated-time">Estimated arrival time ${donationState.estimatedTime || '45 min'}</p>
                         <div class="agent-info">
                             <div class="agent-avatar">
-                                <img src="agent-placeholder.jpg" alt="Agent">
+                                <img src="img1.jpeg" alt="Agent">
                             </div>
                             <p class="agent-name">${donationState.agent || 'Ayush Pant'}</p>
                         </div>
