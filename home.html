@@ -140,8 +140,8 @@
     </div>
 
     <script >
-        const user = localStorage.getItem("user");
-        alert(user);
+        
+        const user = JSON.parse(localStorage.getItem("user"));
         console.log(user);
         document.getElementById("status_bar").innerText = `Hi ${user.contactName}`
     </script>
