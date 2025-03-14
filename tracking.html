@@ -162,11 +162,11 @@
 
                 // Update UI
                 document.getElementById("distance-info").innerText = 
-                    ⁠ Distance: ${remainingDistance.toFixed(2)} km | ETA: ${eta} min ⁠;
+                `Distance: ${remainingDistance.toFixed(2)} km | ETA: ${eta} min`;
 
                 // Update progress bar
                 progress = ((currentStep + 1) / totalSteps) * 100;
-                document.getElementById("progressBar").style.width = ⁠ ${progress}% ⁠;
+                document.getElementById("progressBar").style.width = `${progress}`;
 
                 // Update delivery status
                 let statuses = ["Out for delivery...", "Halfway there!", "Almost Arriving!", "Order Delivered!"];
