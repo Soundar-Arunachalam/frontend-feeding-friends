@@ -8,18 +8,40 @@
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="search.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            margin: 50px auto;
+        }
+        .suggestions {
+            position: absolute;
+            width: 100%;
+            background: white;
+            border: 1px solid #ddd;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .suggestions div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestions div:hover {
+            background: #f8f9fa;
+        }
+    </style>
 </head>
 <body>
-    <div class="main-container">
-        <div class="search-header">
-            <div class="search-bar">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="searchInput" placeholder="Search NGOs, food donations...">
-                <button class="filter-btn">
-                    <i class="fas fa-sliders-h"></i>
-                </button>
+    <div class="container">
+        <div class="search-container">
+            <div class="input-group">
+                <input type="text" id="searchBox" class="form-control" placeholder="Search...">
+                <button class="btn btn-outline-secondary" id="clearBtn">✖</button>
             </div>
+            <div class="suggestions"></div>
         </div>
+    </div>
 
         <div class="search-tabs">
             <div class="tab active" data-tab="ngos">NGOs</div>
@@ -262,7 +284,34 @@
             </a>
         </nav>
     </div>
-
+    <script>
+        const suggestions = ["Apple", "Banana", "Cherry", "Date", "Grapes", "Mango", "Orange", "Peach", "Strawberry", "Watermelon"];
+        
+        $(document).ready(function () {
+            $("#searchBox").on("input", function () {
+                let query = $(this).val().toLowerCase();
+                let filtered = suggestions.filter(item => item.toLowerCase().includes(query));
+                
+                if (query === "") {
+                    $(".suggestions").hide();
+                    return;
+                }
+                
+                let suggestionHTML = filtered.map(item => `<div>${item}</div>`).join("\n");
+                $(".suggestions").html(suggestionHTML).show();
+            });
+            
+            $(".suggestions").on("click", "div", function () {
+                $("#searchBox").val($(this).text());
+                $(".suggestions").hide();
+            });
+            
+            $("#clearBtn").click(function () {
+                $("#searchBox").val("");
+                $(".suggestions").hide();
+            });
+        });
+    </script>
     <script src="search.js"></script>
 </body>
 </html>
